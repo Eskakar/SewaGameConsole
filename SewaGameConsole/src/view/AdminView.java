@@ -4,6 +4,9 @@
  */
 package view;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author ASUS
@@ -14,6 +17,7 @@ public class AdminView extends javax.swing.JPanel {
      * Creates new form AdminView
      */
     public AdminView() {
+        
         initComponents();
     }
 
