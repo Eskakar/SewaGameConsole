@@ -4,8 +4,6 @@
  */
 package view;
 
-
-
 /**
  *
  * @author ASUS
@@ -16,7 +14,6 @@ public class AdminView extends javax.swing.JPanel {
      * Creates new form AdminView
      */
     public AdminView() {
-        
         initComponents();
     }
 
