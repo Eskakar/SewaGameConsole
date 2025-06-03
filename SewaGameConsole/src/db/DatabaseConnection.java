@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package db;
 
 /**
  *
@@ -10,29 +10,28 @@ package model;
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
-/**
- *
- * @author nabil
- */
 public class DatabaseConnection {
-    private static Connection conn;
-
-    public static Connection getConnection() {
-        if (conn == null) {
-            try {
-                String url = "jdbc:mysql://localhost:3306/latres_prakpbo";
-                String user = "root";
-                String pass = "";
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection(url, user, pass);
-                System.out.println("Connected to DB");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private static final String URL = "jdbc:mysql://localhost:3306/rent?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
+    private static final String USERNAME = "root"; // sesuaikan dengan username database Anda
+    private static final String PASSWORD = ""; // sesuaikan dengan password database Anda
+    
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL Driver tidak ditemukan: " + e.getMessage());
         }
-        return conn;
     }
     
-    
+    public static Connection getConnection() throws SQLException {
+        Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        // Test connection
+        if (conn != null && !conn.isClosed()) {
+            return conn;
+        } else {
+            throw new SQLException("Tidak dapat membuat koneksi database");
+        }
+    }
 }
